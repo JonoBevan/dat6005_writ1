@@ -13,21 +13,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # 2. Install Docker Compose (v2)
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Install Docker Compose plugin
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y docker-compose-plugin
-
-      # 3. Build and start all services
+      # 2. Build and start all services
       - name: Start application with docker-compose
         run: |
           docker compose up -d --build
 
-      # 4. Wait for services (optional but recommended)
+      # 3. Wait for services (optional but recommended)
       - name: Wait for services to be ready
         run: |
           echo "Waiting for services..."
@@ -40,7 +31,7 @@ jobs:
             sleep 5
           done
 
-      # 5. Run tests inside the webapp container
+      # 4. Run tests inside the webapp container
       # Adjust the command for your tech stack
       - name: Run tests
         run: |
