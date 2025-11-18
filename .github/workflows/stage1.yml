@@ -39,17 +39,17 @@ jobs:
             sleep 5
           done
 
-      # 5. Install testing dependencies
-      - name: Install testing dependencies
-        working-directory: tests/
-        run: |
-          pip install -r requirements-dev.txt
+      # # 5. Install testing dependencies
+      # - name: Install testing dependencies
+      #   working-directory: tests/
+      #   run: |
+      #     pip install -r requirements-dev.txt
 
 
       # 6. Run tests inside the webapp container
       - name: Run tests
         run: |
-          pytest -q
+          docker compose exec -T swapi_webapp pytest -q
 
       # 7. Shut down docker-compose **always**
       - name: Shut down docker-compose
