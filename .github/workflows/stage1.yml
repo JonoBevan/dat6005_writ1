@@ -44,8 +44,9 @@ jobs:
         run: |
           # docker compose exec -T webapp npm test
           # # or pytest / mvn test / gradle test etc.
-          echo "Running Tests ..."
-          echo "Testing Complete. All Passed"
+          # echo "Running Tests ..."
+          # echo "Testing Complete. All Passed"
+          pytest -q
 
       # 6. Shut down docker-compose **always**
       - name: Shut down docker-compose
