@@ -49,7 +49,7 @@ jobs:
       # 6. Run tests inside the webapp container
       - name: Run tests
         run: |
-          docker compose exec -T -w/favorites_app pytest -q
+          docker compose exec -T -w /app web PYTHONPATH=/app pytest -q swapi_webapp/tests
 
       # 7. Shut down docker-compose **always**
       - name: Shut down docker-compose
