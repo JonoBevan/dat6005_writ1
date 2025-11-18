@@ -1,5 +1,5 @@
 import pytest
-from swapi_webapp import app
+from app import app
 
 def test_movies_status_code():
 
