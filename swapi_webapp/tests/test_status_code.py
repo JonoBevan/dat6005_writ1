@@ -1,6 +1,7 @@
 import pytest
 from swapi_webapp.app import app
 
+
 def test_movies_status_code():
 
     test_client = app.test_client()
