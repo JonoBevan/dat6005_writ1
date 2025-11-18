@@ -41,7 +41,7 @@ jobs:
 
       # 5. Install testing dependencies
       - name: Install testing dependencies
-        working-directory: swapi_webapp/tests/
+        working-directory: tests/
         run: |
           pip install -r requirements-dev.txt
 
@@ -53,6 +53,7 @@ jobs:
 
       # 7. Shut down docker-compose **always**
       - name: Shut down docker-compose
+        working-directory: swapi_webapp/
         if: always()
         run: docker compose down -v
 
