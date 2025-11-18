@@ -37,18 +37,18 @@ jobs:
             echo "Waiting..."
             sleep 5
           done
+      # 5. Install testing dependencies
+      - name: Install testing dependencies
+        run: |
+          pip install -r requirements-dev.txt
 
-      # 5. Run tests inside the webapp container
-      # Adjust the command for your tech stack
+
+      # 6. Run tests inside the webapp container
       - name: Run tests
         run: |
-          # docker compose exec -T webapp npm test
-          # # or pytest / mvn test / gradle test etc.
-          # echo "Running Tests ..."
-          # echo "Testing Complete. All Passed"
           pytest -q
 
-      # 6. Shut down docker-compose **always**
+      # 7. Shut down docker-compose **always**
       - name: Shut down docker-compose
         if: always()
         run: docker compose down -v
