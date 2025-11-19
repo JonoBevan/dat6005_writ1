@@ -48,6 +48,7 @@ jobs:
 
       # 6. Run tests inside the webapp container
       - name: Run tests
+        working-directory: swapi_webapp/
         run: |
           docker compose exec -T -w /app/tests webapp pytest -q 
 
