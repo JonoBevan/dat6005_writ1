@@ -1,10 +1,10 @@
 version: "3.9"
 
 services:
-  web:
+  webapp:
     build: .
     image: swapi-webapp
-    container_name: flask-web
+    container_name: webapp
     ports:
       - "80:80"
     environment:
