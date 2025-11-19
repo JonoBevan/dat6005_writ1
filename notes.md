@@ -5,7 +5,7 @@ As part of the CI pipeline, smoke tests are conducted from within the container 
 When running tests in the CI pipeline yaml file, the following command needs to be run:
 
 ```bash
-docker compose exec -T -w /favorites_app web  pytest -q 
+docker compose exec -T -w /favorites_app web pytest -q 
 ```
 
 -w /favorites_app: Sets the working directory, which is sourced from the WORKINGDIR in the dockerfile. 

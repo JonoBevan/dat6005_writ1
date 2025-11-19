@@ -26,18 +26,18 @@ jobs:
         run: |
           docker compose up -d --build
 
-      # 4. Wait for services (optional but recommended)
-      - name: Wait for services to be ready
-        run: |
-          echo "Waiting for services..."
-          for i in {1..2}; do
-            if docker ps | grep "healthy" >/dev/null; then
-              echo "Containers are healthy!"
-              break
-            fi
-            echo "Waiting..."
-            sleep 5
-          done
+      # # 4. Wait for services (optional but recommended)
+      # - name: Wait for services to be ready
+      #   run: |
+      #     echo "Waiting for services..."
+      #     for i in {1..2}; do
+      #       if docker ps | grep "healthy" >/dev/null; then
+      #         echo "Containers are healthy!"
+      #         break
+      #       fi
+      #       echo "Waiting..."
+      #       sleep 5
+      #     done
 
       # # 5. Install testing dependencies
       # - name: Install testing dependencies
@@ -49,7 +49,7 @@ jobs:
       # 6. Run tests inside the webapp container
       - name: Run tests
         run: |
-          docker compose exec -T -w /favorites_app web PYTHONPATH=/favorites_app pytest -q favorites_app/tests
+          docker compose exec -T -w /app/tests webapp pytest -q 
 
       # 7. Shut down docker-compose **always**
       - name: Shut down docker-compose
