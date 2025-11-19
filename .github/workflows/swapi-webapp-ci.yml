@@ -24,6 +24,7 @@ jobs:
       - name: Start application with docker-compose
         working-directory: swapi_webapp/
         run: |
+          docker compose down -v
           docker compose up -d --build
 
       # # 4. Wait for services (optional but recommended)
@@ -50,7 +51,7 @@ jobs:
       - name: Run tests
         working-directory: swapi_webapp/
         run: |
-          docker compose exec -T -w /app webapp sh -c "PYTHONPATH=/app pytest -q tests/"
+          docker compose exec -T webapp pytest -q tests/
 
       # 7. Shut down docker-compose **always**
       - name: Shut down docker-compose
