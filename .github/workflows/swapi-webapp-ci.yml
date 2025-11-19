@@ -50,7 +50,7 @@ jobs:
       - name: Run tests
         working-directory: swapi_webapp/
         run: |
-          docker compose exec -T -w /app/tests webapp pytest -q 
+          docker compose exec -T -w /app webapp pytest -q tests/
 
       # 7. Shut down docker-compose **always**
       - name: Shut down docker-compose
