@@ -59,6 +59,7 @@ jobs:
         if: always()
         run: docker compose down -v
 
+      # Push the Image to Docker Hub (Continuous Delivery)
       - name: Push Image to Docker Hub 
         run: |
           docker tag swapi-webapp:latest ${{ secrets.DOCKERHUB_USERNAME }}/swapi-webapp:latest
