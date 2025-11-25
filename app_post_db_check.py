@@ -2,7 +2,6 @@ from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 import requests
 import os
-import time
 from sqlalchemy import inspect
 from sqlalchemy.exc import OperationalError, SQLAlchemyError
 
@@ -34,19 +33,24 @@ class Favorite(db.Model):
     type = db.Column(db.String(50), nullable=False)
     url = db.Column(db.String(512), nullable=True)
 
-def wait_for_sql():
-    for i in range(30):
-        try:
-            with app.app_context():
-                db.create_all()
-                print("Database is ready: tables created")
-                return
-        except OperationalError as e:
-            print(f"Database not ready yet ({e}), retrying ({i+1}/30)...")
-            time.sleep(1)
-    raise RuntimeError("Database never became available")
+def ensure_database_ready():
+    try:
+        with app.app_context():
+            inspector = inspect(db.engine)
+            tables = inspector.get_table_names()
 
-wait_for_sql()
+            if "favorites" not in tables:
+                db.create_all()
+                print("Tables created on demand.")
+
+            else:
+                print("Tables exist.")
+    
+    except OperationalError as e:
+        raise RuntimeError(f"Database unavailable: {e}")
+    
+    except SQLAlchemyError as e:
+        raise RuntimeError(f"Database error: {e}")
     
 # Helper that converts MongoDB docs to JSON serialisable format 
 def serialise_favourite(fav: Favorite):
@@ -70,7 +74,8 @@ def add_favorite():
     fav_url = data.get("url")
 
     try:
-
+        ensure_database_ready()
+        
         if fav_type not in ["movie", "character"]:
             raise ValueError("'type' should be 'movie' of 'character'!")
         

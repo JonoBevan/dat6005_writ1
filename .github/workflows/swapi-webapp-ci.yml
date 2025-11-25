@@ -62,5 +62,5 @@ jobs:
       # Push the Image to Docker Hub (Continuous Delivery)
       - name: Push Image to Docker Hub 
         run: |
-          docker tag swapi-webapp:latest ${{ secrets.DOCKERHUB_USERNAME }}/swapi-webapp:latest
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/swapi-webapp:latest
+          docker tag swapi_webapp:mysql ${{ secrets.DOCKERHUB_USERNAME }}/swapi_webapp:mysql
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/swapi_webapp:mysql

@@ -1,24 +1,35 @@
 services:
   webapp:
     build: .
-    image: swapi-webapp
+    image: swapi_webapp:mysql
     container_name: webapp
     ports:
       - "80:80"
     environment:
       FLASK_ENV: development
-      MONGO_URI: mongodb://mongodb:27017/swfavorites
+      DATABASE_URI: mysql+pymysql://swapi_user:swapi_pass@mysql-db:3306/swfavorites
     depends_on:
-      - mongodb
+      mysql-db:
+        condition: service_healthy
 
-  mongodb:
-    image: mongo:6
-    container_name: mongo-db
+  mysql-db:
+    image: mysql:8
+    container_name: mysql-db
     restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: swfavorites
+      MYSQL_USER: swapi_user
+      MYSQL_PASSWORD: swapi_pass
     ports:
-      - "27017:27017"
+      - "3306:3306"
     volumes:
-      - mongo_data:/data/db
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 3s
+      retries: 15
 
 volumes:
-  mongo_data:
+  mysql_data:
