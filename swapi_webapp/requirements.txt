@@ -5,3 +5,7 @@ pymongo==4.10.1
 pytest
 pytest-mock
 requests-mock
+flask_sqlalchemy
+SQLAlchemy
+pymysql
+cryptography
