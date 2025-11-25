@@ -17,7 +17,7 @@ resource "aws_db_instance" "mysql" {
   username                = "swapi_user"
   password                = "swapi_pass"
 
-  publicly_accessible     = true        # <-- Required
+  publicly_accessible     = true 
   skip_final_snapshot     = true
 
   vpc_security_group_ids  = [aws_security_group.mysql_public_sg.id]
