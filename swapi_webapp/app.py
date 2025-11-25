@@ -16,7 +16,7 @@ app = Flask(__name__)
 
 app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv(
     "DATABASE_URI",
-    "mysql+pymysql://swapi_user:swapi_pass@mysql-db:3306/swfavorites"
+    "mysql+pymysql://swapi_user:swapi_pass@swapi-mysql-db.c7ks40ay8cnf.eu-west-2.rds.amazonaws.com:3306/swfavorites"
 )
 
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
@@ -48,7 +48,6 @@ def wait_for_sql():
 
 wait_for_sql()
     
-# Helper that converts MongoDB docs to JSON serialisable format 
 def serialise_favourite(fav: Favorite):
     return {
         "_id": fav.id,
