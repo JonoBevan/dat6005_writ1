@@ -3,12 +3,12 @@ name: Terraform Destroy
 on: workflow_dispatch
 
 jobs:
-  destroy:
+  terraform:
+    name: Teardown Terrform
     runs-on: ubuntu-latest
-
     env:
-      TF_VAR_db_username: ${{ secrest.DB_USERNAME }}
-      TF_VAR_db_password: ${{ secrest.DB_PASSWORD }}
+      TF_VAR_db_username: ${{ secrets.DB_USERNAME }}
+      TF_VAR_db_password: ${{ secrets.DB_PASSWORD }}
 
     steps:
       - name: Checkout
