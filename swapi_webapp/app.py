@@ -12,13 +12,13 @@ Once active, it accepts GET and POST requests to return specified information.
 It runs off localhost in this iteration
 '''
 
-ec2_public_dns = "swapi-mysql-db.c7ks40ay8cnf.eu-west-2.rds.amazonaws.com"
+mysql_database_public_endpoint = "swapi-mysql-db.c7ks40ay8cnf.eu-west-2.rds.amazonaws.com"
 
 app = Flask(__name__)
 
 app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv(
     "DATABASE_URI",
-    f"mysql+pymysql://swapi_user:swapi_pass@{ec2_public_dns}:3306/swfavorites"
+    f"mysql+pymysql://swapi_user:swapi_pass@{mysql_database_public_endpoint}:3306/swfavorites"
 )
 
 ## For container version of MySQL database 
